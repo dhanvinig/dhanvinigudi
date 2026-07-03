@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhanvini Gudi · Researcher & Science Communicator</title>
+
+  <!-- FONTS — change these by searching Google Fonts for alternatives -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════
+       QUICK CUSTOMIZATION — edit these values first
+    ═══════════════════════════════════════════════════ */
+    :root {
+      --purple:       #6832B8;   /* main accent — change to your preferred color */
+      --purple-pale:  #F1ECF9;   /* very light purple for backgrounds */
+      --teal:         #1A7A6C;   /* second accent */
+      --teal-pale:    #E6F4F1;   /* very light teal for backgrounds */
+      --bg:           #FFFFFF;   /* page background */
+      --surface:      #F8F5F1;   /* subtle warm off-white for alternating sections */
+      --text:         #1C1818;   /* main text color */
+      --text-2:       #5E5860;   /* secondary text */
+      --text-3:       #A09CA4;   /* muted / placeholder text */
+      --border:       #E8E2DB;   /* borders */
+      --radius:       10px;
+      --radius-lg:    16px;
+      --max-w:        1060px;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       BASE RESET
+    ═══════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    h1, h2, h3, h4 { font-family: 'Lora', serif; font-weight: 600; line-height: 1.2; }
+    img { max-width: 100%; display: block; }
+    a { color: var(--purple); }
+    a:hover { opacity: 0.8; }
+
+    /* ═══════════════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 2rem;
+      height: 62px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 700;
+      color: var(--text); cursor: pointer; text-decoration: none;
+    }
+    .nav-links { list-style: none; display: flex; gap: 0.15rem; }
+    .nav-link {
+      font-size: 0.88rem; font-weight: 700; color: var(--text-2);
+      padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer;
+      transition: color 0.15s, background 0.15s; user-select: none;
+    }
+    .nav-link:hover { color: var(--text); background: var(--surface); }
+    .nav-link.active { color: var(--purple); background: var(--purple-pale); }
+    .nav-hamburger {
+      display: none; background: none; border: none;
+      font-size: 1.4rem; cursor: pointer; color: var(--text-2);
+    }
+    .mobile-nav {
+      display: none; position: fixed; top: 62px; left: 0; right: 0; z-index: 99;
+      background: var(--bg); border-bottom: 1px solid var(--border); padding: 0.5rem 2rem 1rem;
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav-link {
+      display: block; font-size: 1rem; font-weight: 700; color: var(--text-2);
+      padding: 0.8rem 0.25rem; border-bottom: 1px solid var(--border);
+      cursor: pointer; transition: color 0.15s;
+    }
+    .mobile-nav-link:last-child { border-bottom: none; }
+    .mobile-nav-link:hover, .mobile-nav-link.active { color: var(--purple); }
+
+    /* ═══════════════════════════════════════════════════
+       SECTIONS
+    ═══════════════════════════════════════════════════ */
+    .section { display: none; padding-top: 62px; min-height: 100vh; }
+    .section.active { display: block; }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; padding: 3.5rem 2rem; }
+    .bg-surface { background: var(--surface); }
+
+    /* ═══════════════════════════════════════════════════
+       SHARED COMPONENTS
+    ═══════════════════════════════════════════════════ */
+
+    /* Eyebrow labels */
+    .eyebrow {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.74rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--purple); margin-bottom: 0.4rem;
+    }
+
+    /* Section title */
+    .page-title {
+      font-size: clamp(1.9rem, 4vw, 2.5rem); font-weight: 700;
+      color: var(--text); margin-bottom: 0.5rem;
+    }
+    .page-desc { font-size: 1rem; color: var(--text-2); max-width: 54ch; }
+
+    /* Horizontal rule */
+    hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .tag {
+      font-size: 0.76rem; font-weight: 700;
+      padding: 0.25rem 0.65rem; border-radius: 20px;
+      background: var(--purple-pale); color: var(--purple);
+    }
+    .tag.teal { background: var(--teal-pale); color: var(--teal); }
+
+    /* Buttons */
+    .btn {
+      display: inline-block; font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 700; padding: 0.6rem 1.4rem;
+      border-radius: 8px; border: none; cursor: pointer; text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); text-decoration: none; }
+    .btn-primary { background: var(--purple); color: #fff; }
+    .btn-outline { background: transparent; color: var(--purple); border: 2px solid var(--purple); }
+
+    /* ═══════════════════════════════════════════════════
+       ABOUT PAGE
+    ═══════════════════════════════════════════════════ */
+    .about-hero {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 4rem; align-items: center; margin-bottom: 3rem;
+    }
+    .about-greeting {
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem); font-weight: 700;
+      line-height: 1.05; margin-bottom: 0.5rem;
+    }
+    .about-greeting em { font-style: italic; color: var(--purple); }
+    .about-role { font-size: 1rem; color: var(--text-2); margin-bottom: 1.5rem; }
+    .about-bio { font-size: 1rem; line-height: 1.85; max-width: 56ch; margin-bottom: 1.75rem; }
+
+    .social-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .social-link {
+      font-size: 0.82rem; font-weight: 700; color: var(--text-2);
+      padding: 0.4rem 0.85rem; border-radius: 6px; border: 1.5px solid var(--border);
+      text-decoration: none; transition: color 0.15s, border-color 0.15s;
+    }
+    .social-link:hover { color: var(--purple); border-color: var(--purple); }
+
+    /* Icon buttons (About page social row) */
+    .icon-btn {
+      width: 44px; height: 44px; flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 50%; border: 1.5px solid var(--border);
+      background: var(--bg); color: var(--text-2); text-decoration: none;
+      transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.15s;
+    }
+    .icon-btn:hover {
+      color: var(--purple); border-color: var(--purple);
+      background: var(--purple-pale); transform: translateY(-2px); opacity: 1;
+    }
+    .icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* Photo */
+    .photo-wrap { flex-shrink: 0; }
+    .photo-circle {
+      width: 460px; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+      background: var(--surface); box-shadow: 0 0 0 3px var(--purple-pale);
+    }
+    .photo-circle img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 100% ;
+  transform: scale(1.35) translateX(-60px);
+  backface-visibility: hidden;
+}
+
+    /* Fact strip */
+    .fact-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .fact-card {
+      background: var(--surface); border-radius: var(--radius-lg);
+      padding: 1.25rem 1rem; text-align: center;
+    }
+    .fact-number {
+      font-family: 'Lora', serif; font-size: 2rem; font-weight: 700;
+      color: var(--purple); display: block;
+    }
+    .fact-label { font-size: 0.8rem; font-weight: 700; color: var(--text-2); margin-top: 0.1rem; }
+
+    /* Two-column split */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .two-col h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+    .two-col p { font-size: 0.92rem; color: var(--text-2); line-height: 1.8; margin-bottom: 1rem; }
+
+    /* ═══════════════════════════════════════════════════
+       RESEARCH PAGE
+    ═══════════════════════════════════════════════════ */
+    .current-project {
+      background: var(--purple-pale);
+      border-left: 4px solid var(--purple);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      padding: 1.75rem 2rem; margin-bottom: 2.5rem;
+    }
+    .current-project h3 { font-size: 1.2rem; margin-bottom: 0.6rem; }
+    .current-project p { font-size: 0.94rem; color: var(--text-2); line-height: 1.8; margin-bottom: 1rem; }
+
+    .interests-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 0.6rem; margin-bottom: 2.5rem;
+    }
+    .interest-item {
+      font-size: 0.88rem; font-weight: 600; padding: 0.6rem 0.9rem;
+      border-radius: 8px; background: var(--surface);
+      border-left: 3px solid var(--teal); color: var(--text);
+    }
+
+    .pub-list { display: flex; flex-direction: column; gap: 1rem; }
+    .pub-item {
+      padding: 1.25rem 1.5rem; border-radius: var(--radius);
+      background: var(--bg); border: 1.5px solid var(--border);
+      transition: border-color 0.15s;
+    }
+    .pub-item:hover { border-color: var(--purple); }
+    .pub-title {
+      font-family: 'Lora', serif; font-size: 0.97rem; font-weight: 600;
+      color: var(--text); margin-bottom: 0.3rem; line-height: 1.45;
+    }
+    .pub-authors { font-size: 0.83rem; color: var(--text-2); margin-bottom: 0.2rem; }
+    .pub-venue { font-size: 0.84rem; color: var(--teal); font-weight: 700; }
+    .pub-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em;
+      padding: 0.15rem 0.5rem; border-radius: 4px; margin-left: 0.5rem;
+      background: var(--purple-pale); color: var(--purple); vertical-align: middle;
+    }
+
+    .conf-list { display: flex; flex-direction: column; }
+    .conf-item {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+    }
+    .conf-item:last-child { border-bottom: none; }
+    .conf-year { font-size: 0.8rem; font-weight: 700; color: var(--purple); padding-top: 0.1rem; }
+    .conf-title { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+    .conf-venue { font-size: 0.82rem; color: var(--text-2); margin-top: 0.15rem; }
+
+    /* Research — clean text list (no card blocks) */
+    .pub-text-list { display: flex; flex-direction: column; gap: 1.15rem; margin-bottom: 0.5rem; }
+    .pub-entry { padding-left: 0.9rem; border-left: 3px solid var(--purple-pale); }
+    .pub-entry .t {
+      font-family: 'Lora', serif; font-size: 0.98rem; font-weight: 700;
+      color: var(--text); line-height: 1.45; margin-bottom: 0.2rem;
+    }
+    .pub-entry .a { font-size: 0.82rem; color: var(--text-2); line-height: 1.55; margin-bottom: 0.1rem; }
+    .pub-entry .a b { color: var(--purple); }
+    .pub-entry .v { font-size: 0.82rem; font-weight: 700; color: var(--teal); }
+    .scholar-link { display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; font-weight: 700; }
+
+    .meta-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .meta-card { padding: 1.25rem; border-radius: var(--radius-lg); background: var(--surface); }
+    .meta-card h4 {
+      font-family: 'Nunito Sans', sans-serif; font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-2); margin-bottom: 0.6rem;
+    }
+    .meta-card p { font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+
+    /* ═══════════════════════════════════════════════════
+       SCICOMM PAGE
+    ═══════════════════════════════════════════════════ */
+    .sci-tabs {
+      display: flex; border-bottom: 2px solid var(--border); margin-bottom: 2rem;
+    }
+    .sci-tab {
+      font-family: 'Nunito Sans', sans-serif; font-size: 0.9rem; font-weight: 700;
+      color: var(--text-2); padding: 0.65rem 1.1rem 0.8rem;
+      border: none; background: none; border-bottom: 2px solid transparent;
+      margin-bottom: -2px; cursor: pointer; transition: color 0.15s, border-color 0.15s;
+    }
+    .sci-tab:hover { color: var(--text); }
+    .sci-tab.active { color: var(--purple); border-bottom-color: var(--purple); }
+    .sci-panel { display: none; }
+    .sci-panel.active { display: block; }
+
+    /* Social posts grid */
+    .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 1.1rem; }
+    .post-card {
+      display: block; text-decoration: none; color: inherit; cursor: pointer;
+      border-radius: var(--radius-lg); overflow: hidden;
+      border: 1.5px solid var(--border); background: var(--bg);
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    .post-card:hover { border-color: var(--purple); transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.08); }
+    .post-thumb {
+      aspect-ratio: 1; background: var(--surface);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; color: var(--text-3); font-size: 0.8rem; text-align: center; padding: 1rem;
+    }
+    .post-thumb img { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; backface-visibility: hidden; }
+    .platform-pill {
+      position: absolute; top: 0.65rem; left: 0.65rem; z-index: 1;
+      font-size: 0.67rem; font-weight: 700; letter-spacing: 0.04em;
+      padding: 0.2rem 0.5rem; border-radius: 4px;
+      background: rgba(255,255,255,0.92); color: var(--text-2); border: 1px solid var(--border);
+    }
+    .post-body { padding: 1rem; }
+    .post-caption { font-size: 0.85rem; color: var(--text); line-height: 1.55; margin-bottom: 0.45rem; }
+    .post-meta { font-size: 0.74rem; color: var(--text-3); font-weight: 700; }
+
+    /* Writing list */
+    .writing-list { display: flex; flex-direction: column; gap: 1rem; }
+    .writing-item {
+      display: flex; gap: 1.25rem; align-items: flex-start; position: relative;
+      padding: 1.25rem 1.4rem; border-radius: var(--radius-lg);
+      border: 1.5px solid var(--border); background: var(--bg); text-decoration: none; color: inherit;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .writing-item:hover { border-color: var(--teal); transform: translateX(4px); }
+    a.writing-item::after {
+      content: '↗'; position: absolute; top: 0.9rem; right: 1rem;
+      font-size: 0.95rem; font-weight: 700; color: var(--text-3); opacity: 0; transition: opacity 0.15s;
+    }
+    a.writing-item:hover::after { opacity: 1; color: var(--teal); }
+    .writing-badge {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em;
+      padding: 0.25rem 0.6rem; border-radius: 6px;
+      background: var(--teal-pale); color: var(--teal); white-space: nowrap;
+      margin-top: 0.15rem; flex-shrink: 0;
+    }
+    .writing-title {
+      font-family: 'Lora', serif; font-size: 0.97rem; font-weight: 600;
+      color: var(--text); margin-bottom: 0.3rem;
+    }
+    .writing-desc { font-size: 0.85rem; color: var(--text-2); line-height: 1.6; margin-bottom: 0.3rem; }
+    .writing-meta { font-size: 0.75rem; color: var(--text-3); font-weight: 700; }
+
+    /* Projects grid */
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.25rem; }
+    .project-card {
+      display: block; text-decoration: none; color: inherit; position: relative;
+      padding: 1.6rem; border-radius: var(--radius-lg);
+      border: 1.5px solid var(--border); background: var(--bg);
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    a.project-card { cursor: pointer; }
+    .project-card:hover { border-color: var(--purple); transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.08); }
+    a.project-card::after {
+      content: '↗'; position: absolute; top: 1rem; right: 1.1rem;
+      font-size: 1rem; font-weight: 700; color: var(--text-3); opacity: 0; transition: opacity 0.15s;
+    }
+    a.project-card:hover::after { opacity: 1; color: var(--purple); }
+    .project-icon { font-size: 1.8rem; margin-bottom: 0.85rem; }
+    .project-title { font-family: 'Lora', serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+    .project-desc { font-size: 0.87rem; color: var(--text-2); line-height: 1.7; margin-bottom: 1rem; }
+
+    /* ═══════════════════════════════════════════════════
+       CV PAGE
+    ═══════════════════════════════════════════════════ */
+    .cv-top {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--purple-pale); border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem; margin-bottom: 2.5rem;
+    }
+    .cv-top p { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .cv-top span { font-size: 0.83rem; color: var(--text-2); display: block; margin-top: 0.1rem; }
+
+    .tl-group { margin-bottom: 2.25rem; }
+    .tl-label {
+      font-size: 0.74rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .tl-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .tl-item {
+      display: grid; grid-template-columns: 130px 1fr;
+      gap: 1.25rem; padding: 0.9rem 0; border-bottom: 1px solid var(--border);
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-date { font-size: 0.78rem; font-weight: 700; color: var(--text-2); padding-top: 0.15rem; }
+    .tl-title { font-family: 'Lora', serif; font-size: 0.97rem; font-weight: 600; color: var(--text); margin-bottom: 0.15rem; }
+    .tl-sub { font-size: 0.84rem; color: var(--text-2); margin-bottom: 0.35rem; }
+    .tl-desc { font-size: 0.84rem; color: var(--text-3); line-height: 1.65; }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(235px, 1fr)); gap: 1rem; }
+    .skill-card { background: var(--surface); border-radius: var(--radius-lg); padding: 1.1rem 1.25rem; }
+    .skill-title {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--text-2); margin-bottom: 0.7rem;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CONTACT PAGE
+    ═══════════════════════════════════════════════════ */
+    .contact-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.25rem; border-radius: var(--radius-lg);
+      border: 1.5px solid var(--border); background: var(--bg);
+      text-decoration: none; color: inherit; margin-bottom: 0.75rem;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .contact-link:hover { border-color: var(--teal); transform: translateX(3px); }
+    .contact-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--teal-pale); color: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
+    }
+    .contact-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); }
+    .contact-value { font-size: 0.9rem; color: var(--text); }
+
+    .contact-form { background: var(--surface); border-radius: var(--radius-lg); padding: 1.75rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-2); margin-bottom: 0.35rem; }
+    .form-input, .form-textarea {
+      width: 100%; background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 8px; padding: 0.65rem 0.9rem; color: var(--text);
+      font-family: 'Nunito Sans', sans-serif; font-size: 0.9rem; outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--purple); }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-3); }
+    .form-textarea { min-height: 110px; resize: vertical; }
+    .form-note { font-size: 0.75rem; color: var(--text-3); margin-top: 0.65rem; text-align: center; }
+
+    /* ═══════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════ */
+    @media (max-width: 800px) {
+      .about-hero, .two-col, .contact-split, .meta-pair { grid-template-columns: 1fr; }
+      .photo-circle { width: 150px; margin: 0 auto; }
+      .fact-strip { grid-template-columns: 1fr 1fr 1fr; }
+      .tl-item { grid-template-columns: 1fr; gap: 0.1rem; }
+      .writing-item { flex-direction: column; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+    }
+    @media (max-width: 480px) {
+      .section-inner { padding: 2.5rem 1.25rem; }
+      .fact-strip { grid-template-columns: 1fr 1fr; }
+      .post-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── ACADEMIC SECTION ── */
+    .acad-tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 2rem; }
+    .acad-tab {
+      font-family: 'Nunito Sans', sans-serif; font-size: 0.9rem; font-weight: 700;
+      color: var(--text-2); padding: 0.65rem 1.1rem 0.8rem;
+      border: none; background: none; border-bottom: 2px solid transparent;
+      margin-bottom: -2px; cursor: pointer; transition: color 0.15s, border-color 0.15s;
+    }
+    .acad-tab:hover { color: var(--text); }
+    .acad-tab.active { color: var(--purple); border-bottom-color: var(--purple); }
+    .acad-panel { display: none; }
+    .acad-panel.active { display: block; }
+
+    .course-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+      gap: 1.1rem; margin-bottom: 2rem;
+    }
+    .course-card {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.4rem 1.5rem;
+      transition: border-color 0.15s;
+    }
+    .course-card:hover { border-color: var(--purple); }
+    .course-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 1rem; margin-bottom: 0.85rem;
+    }
+    .course-name { font-family: 'Lora', serif; font-size: 0.97rem; font-weight: 600; color: var(--text); }
+    .course-inst { font-size: 0.81rem; color: var(--text-2); margin-top: 0.15rem; }
+    .role-badge {
+      font-size: 0.69rem; font-weight: 700; letter-spacing: 0.03em;
+      padding: 0.25rem 0.6rem; border-radius: 6px;
+      background: var(--purple-pale); color: var(--purple); white-space: nowrap; flex-shrink: 0;
+    }
+    .course-bullets { font-size: 0.86rem; color: var(--text-2); line-height: 1.72; padding-left: 1.1rem; }
+    .course-bullets li { margin-bottom: 0.4rem; }
+    .course-bullets li:last-child { margin-bottom: 0; }
+
+    @media (max-width: 800px) { .course-grid { grid-template-columns: 1fr; } }
+
+    /* ── SECTION PHOTO AREAS (used on every tab) ── */
+    .section-top {
+      display: grid; grid-template-columns: 1fr 435px;
+      gap: 3rem; align-items: center; margin-bottom: 2.5rem;
+    }
+    .sec-photo {
+      width: 435px; aspect-ratio: 4/3; border-radius: var(--radius-lg);
+      overflow: hidden; background: var(--surface);
+    }
+    .sec-photo img { display: block; width: 100%; height: 100%; object-fit: cover; backface-visibility: hidden; }
+    .photo-ph {
+      text-align: center; color: var(--text-3); font-size: 0.82rem;
+      line-height: 1.9; padding: 1rem;
+    }
+    .photo-ph small { display: block; font-size: 0.7rem; margin-top: 0.25rem; }
+    @media (max-width: 900px) {
+      .section-top { grid-template-columns: 1fr; }
+      .sec-photo { width: 100%; max-width: 520px; }
+    }
+
+    /* ── VALUE PROP + ROLE STACK (About hero) ── */
+    .about-value {
+      font-family: 'Lora', serif; font-size: 1.18rem; line-height: 1.5;
+      color: var(--text); margin-bottom: 1.1rem; max-width: 52ch;
+    }
+    .about-value em { font-style: italic; color: var(--purple); }
+    .role-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.6rem; }
+    .role-pill {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.02em;
+      padding: 0.3rem 0.75rem; border-radius: 20px;
+      background: var(--purple-pale); color: var(--purple);
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.4rem; }
+
+    /* ── WORK WITH ME (offer cards) ── */
+    .offer-lead {
+      font-size: 1.02rem; line-height: 1.85; color: var(--text-2);
+      max-width: 72ch; margin-bottom: 2.4rem;
+    }
+    .offer-lead strong { color: var(--text); }
+    .offer-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.25rem; margin-bottom: 2.75rem;
+    }
+    .offer-card {
+      display: flex; flex-direction: column; padding: 1.6rem;
+      border-radius: var(--radius-lg); border: 1.5px solid var(--border);
+      background: var(--bg); transition: border-color 0.15s, transform 0.15s;
+    }
+    .offer-card:hover { border-color: var(--purple); transform: translateY(-3px); }
+    .offer-icon { font-size: 1.7rem; margin-bottom: 0.7rem; }
+    .offer-title { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+    .offer-desc { font-size: 0.88rem; color: var(--text-2); line-height: 1.7; margin-bottom: 1.1rem; }
+    .offer-card .btn { margin-top: auto; align-self: flex-start; }
+
+    /* ── NEWSLETTER / SUBSCRIBE CARD ── */
+    .subscribe-card {
+      background: var(--purple-pale); border-radius: var(--radius-lg);
+      padding: 1.85rem 2rem;
+    }
+    .subscribe-card h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+    .subscribe-card p { font-size: 0.92rem; color: var(--text-2); line-height: 1.7; margin-bottom: 1rem; max-width: 58ch; }
+    .subscribe-embed { width: 100%; max-width: 480px; border: none; background: transparent; }
+    .subscribe-fallback { font-size: 0.82rem; margin-top: 0.6rem; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════
+       NAV
+  ══════════════════════════════════════════════════ -->
+  <nav>
+    <div class="nav-inner">
+      <!-- EDIT: Your name in the nav bar -->
+      <span class="nav-brand" onclick="showSection('about')">Dhanvini Gudi</span>
+      <ul class="nav-links">
+        <li><span class="nav-link active"  onclick="showSection('about')">About</span></li>
+        <li><span class="nav-link"         onclick="showSection('academic')">Academic</span></li>
+        <li><span class="nav-link"         onclick="showSection('scicomm')">Scicomm</span></li>
+        <li><span class="nav-link"         onclick="showSection('creative')">Art</span></li>
+        <li><span class="nav-link"         onclick="showSection('workwithme')">Work With Me</span></li>
+        <li><span class="nav-link"         onclick="showSection('cv')">CV</span></li>
+      </ul>
+      <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <span class="mobile-nav-link active"  onclick="showSection('about');    closeMenu()">About</span>
+    <span class="mobile-nav-link"         onclick="showSection('academic'); closeMenu()">Academic</span>
+    <span class="mobile-nav-link"         onclick="showSection('scicomm');  closeMenu()">Scicomm</span>
+    <span class="mobile-nav-link"         onclick="showSection('creative'); closeMenu()">Art</span>
+    <span class="mobile-nav-link"         onclick="showSection('workwithme'); closeMenu()">Work With Me</span>
+    <span class="mobile-nav-link"         onclick="showSection('cv');       closeMenu()">CV</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       ABOUT
+  ══════════════════════════════════════════════════ -->
+  <section class="section active" id="about">
+    <div class="section-inner">
+
+      <!-- Hero -->
+      <div class="about-hero">
+        <div>
+          <!-- EDIT: Your greeting / first name -->
+          <h1 class="about-greeting">Hi, I'm <em>Dhanvini.</em></h1>
+
+          <!-- EDIT: Your role and affiliation -->
+          <p class="about-role">
+            PhD Candidate  &nbsp;·&nbsp; Science Communicator &nbsp;·&nbsp; Educator &nbsp;·&nbsp; Community Builder
+            
+          </p>
+
+          <!-- EDIT: One-line value proposition — what you do FOR people -->
+          <p class="about-value">I am passionate about <em>breaking down complex science to invoke curiosity</em> through storytelling, visual media, talks, courses, and educational programs.</p>
+
+          <!-- EDIT: 3–4 sentence bio -->
+          <p class="about-bio">
+            I am currently a PhD candidate in the <a href="https://engineering.jhu.edu/nanoenergy/" target="_blank">Nano Energy Lab</a> at Johns Hopkins University in the department of Electrical and Computer Engineering. My research work focuses on making quantum dots, using them to make new and interesting materials, making solar devices using these novel materials, and testing these new materials and devices to study how they behave.
+          </p>
+          <p class="about-bio">
+            Beyond the bench, I love to break down jargon into easily digestible info-bites through my social media channel <a href="https://www.instagram.com/dhanviniexplores/" target="_blank"><strong>Dhanvini Explores</strong></a>. I like to create content, curricula, and programs geared towards a non-scientific audience to explore science from a lens of curiosity. So that we view science as something to be understood, used, and applied, instead of a mysterious black box. My passion lies in facilitating learning through exploration. I thrive in collaborative spaces where we work together to create new ways to make that happen.
+          </p>
+          <p class="about-bio">
+            I am also passionate about Indian classical dance and community building. I founded <a href="https://www.instagram.com/bmorenatyam/" target="_blank"><strong>BMore Natyam</strong></a>. This has grown to be a creative dance community of Bharatanatyam dancers looking for ways to come together to learn, create, and grow their art.
+          </p>
+          <!-- EDIT: Your social links — update href values -->
+          <div class="social-row">
+            <a class="icon-btn" href="mailto:scicuriously@gmail.com" aria-label="Email" title="Email">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+            <a class="icon-btn" href="https://www.linkedin.com/in/dhanvini-gudi" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+            </a>
+            <a class="icon-btn" href="https://www.instagram.com/dhanviniexplores" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.71-2.13 1.38C1.34 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.71 1.46 1.38 2.13.67.67 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+            </a>
+            <a class="icon-btn" href="https://scholar.google.com/citations?user=Yqbgqm4AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+            </a>
+            <a class="icon-btn" href="https://dhanviniexplores.substack.com/" target="_blank" rel="noopener" aria-label="Substack" title="Substack">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+            </a>
+            <a class="icon-btn" href="https://bsky.app/profile/dhanviniexplores.bsky.social" target="_blank" rel="noopener" aria-label="Bluesky" title="Bluesky">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+            </a>
+          </div>
+
+          <!-- EDIT: Primary calls to action -->
+          <div class="cta-row">
+            <span class="btn btn-primary" onclick="showSection('workwithme')">Do you want to work with me? →</span>
+            <a class="btn btn-outline" href="mailto:dhanvini.gudi@gmail.com">Email me</a>
+          </div>
+        </div>
+
+        <div class="photo-wrap">
+          <div class="photo-circle">
+            <!-- ══════════════════════════════════════════
+                 EDIT PHOTO — About / Profile
+                 1. Put your photo file in the same folder as index.html
+                 2. Delete the line with 📷 below
+                 3. Add this line instead:
+                    <img src="YOUR-FILENAME.jpg" alt="Dhanvini Gudi">
+                 Recommended: square, 400×400px or larger
+            ══════════════════════════════════════════ -->
+             <img src="about1.jpg" alt="Dhanvini Gudi">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       ACADEMIC (Teaching + Research)
+  ══════════════════════════════════════════════════ -->
+  <section class="section" id="academic">
+    <div class="section-inner">
+
+      <div class="section-top">
+        <div>
+          <p class="eyebrow">Teaching · Research · Mentorship</p>
+          <h2 class="page-title">Academic</h2>
+          <p class="page-desc">I have research experience in experimental techniques such as material synthesis, device fabrication, nanofabrication, thin film processing. I also have expertise in material, optical and electronic characterization techniques. Along with experimental work, I have experience with device simulation software and device data processing. You can find a full list of my publications and research projects in my CV.
+</p>
+<p class="page-desc">
+
+I have served as a course and teaching assistant for courses in electrical and computer engineering, mentored several high school, undergraduate, and graduate students in research. I am passionate about designing curricula and delivering courses in general electronics, nano-materials, and optoelectronics.
+        </div>
+        <div class="sec-photo">
+          <!-- ══════════════════════════════════════════
+               EDIT PHOTO — Academic tab
+               Suggested: teaching, presenting at a conference, or in the lab
+               1. Put your photo file in the same folder as index.html
+               2. Delete the <div class="photo-ph"> line below
+               3. Add: <img src="YOUR-FILENAME.jpg" alt="Dhanvini teaching">
+               Recommended: 600×450px landscape
+          ══════════════════════════════════════════ -->
+          <img src="academic.jpg" alt="Dhanvini teaching" style="object-position: 0% center; transform: scale(1.1);">
+
+        </div>
+      </div>
+
+      <div class="acad-tabs">
+        <button class="acad-tab active" onclick="showAcadTab('teaching', this)">Teaching</button>
+        <button class="acad-tab"        onclick="showAcadTab('research', this)">Research</button>
+      </div>
+
+
+      <!-- ── TEACHING ──────────────────────────────────── -->
+      <div class="acad-panel active" id="acad-teaching">
+
+        <p class="eyebrow" style="margin-bottom:1rem;">Courses — Johns Hopkins University</p>
+        <div class="pub-text-list">
+
+          <div class="pub-entry">
+            <div class="t">Advanced Optical Instruments</div>
+            <div class="a">Whiting School of Engineering</div>
+            <div class="v">Course Assistant</div>
+          </div>
+
+          <div class="pub-entry">
+            <div class="t">Introduction to Optical Instruments</div>
+            <div class="a">Whiting School of Engineering</div>
+            <div class="v">Course Assistant</div>
+          </div>
+
+          <div class="pub-entry">
+            <div class="t">Photovoltaic Devices</div>
+            <div class="a">Whiting School of Engineering</div>
+            <div class="v">Teaching Assistant · Guest Lecturer</div>
+          </div>
+
+          <div class="pub-entry">
+            <div class="t">Introduction to Renewable Energy Engineering</div>
+            <div class="a">Whiting School of Engineering</div>
+            <div class="v">Teaching Assistant · Guest Lecturer</div>
+          </div>
+
+        </div>
+
+        <hr>
+
+        <p class="eyebrow" style="margin-bottom:1rem;">Pedagogy Training &amp; Certifications</p>
+        <div class="meta-pair">
+          <div class="meta-card">
+            <h4>JHU Teaching Academy</h4>
+            <p>Educational Scholarship Methods · JEDI in the Classroom: Fostering Inclusive Learning Environments · Teaching Institute Certification </p>
+          </div>
+          <div class="meta-card">
+            <h4>CIRTL Network</h4>
+            <p>Evidence-Based Undergraduate STEM Teaching · Incorporating Active Learning — learning objectives design, active learning strategies, inclusive classroom practice</p>
+          </div>
+        </div>
+
+      </div><!-- /acad-teaching -->
+
+
+      <!-- ── RESEARCH ───────────────────────────────── -->
+      <div class="acad-panel" id="acad-research">
+
+     
+
+        <p class="eyebrow" style="margin-bottom:1rem;">Recent Journal Publications</p>
+        <div class="pub-text-list">
+
+          <div class="pub-entry">
+            <div class="t">A Novel Synthesis Approach to Quasi-Stable Ultra-small PbS CQDs for Multijunction Solar Cells</div>
+            <div class="a"><b>Dhanvini Gudi*</b>, Delancy Ma*, Joseph Zoller IV, Jill Cleveland, Susanna M. Thon</div>
+            <div class="v">Manuscript in preparation · 2026</div>
+          </div>
+
+          <div class="pub-entry">
+            <div class="t">Solution-Exfoliated WSe₂ as a Hole Transport Material for PbS Colloidal Quantum Dot Solar Cells</div>
+            <div class="a"><b>Dhanvini Gudi*</b>, Arlene Chiu*, Dana C. Kachman, Serene Kamal, Eric Rong, Yucheng Lan, Susanna M. Thon</div>
+            <div class="v">Manuscript in preparation · 2026</div>
+          </div>
+
+          <div class="pub-entry">
+            <div class="t">Solar-Matched Colloidal Quantum Dots / Metal-Organic Framework Hybrid Materials for Photo-Induced Charge Transfer</div>
+            <div class="a"><b>Dhanvini Gudi*</b>, Kevin J. Bennett*, Jill M. Cleveland, Luke R. O'Connor, Gregory Foley, James R. Wilkes, Kyle S. Barcus, Hoon Jeong Lee, Arthur E. Bragg, Jier Huang, Susanna M. Thon, V. Sara Thoi</div>
+            <div class="v">Manuscript under review · Nov 2025</div>
+          </div>
+
+          <div class="pub-entry">
+            <div class="t">Charge Transfer in Hybrid Quantum Dot / Metal-Organic Framework Systems: Current Understanding and Future Challenges</div>
+            <div class="a">Kyle Barcus, Jill Cleveland, <b>Dhanvini Gudi</b>, Kevin Bennett, Susanna M. Thon, V. Sara Thoi</div>
+            <div class="v">Coordination Chemistry Reviews, Vol. 542 · Aug 2025</div>
+          </div>
+
+        </div>
+
+        <hr>
+
+        <p class="eyebrow" style="margin-bottom:1rem;">Recent Conference Presentations</p>
+        <div class="pub-text-list">
+
+          <div class="pub-entry">
+            <div class="t">Synthesis and Characterization of Hybrid Quantum Dot–Metal Organic Framework Composites for Photobatteries</div>
+            <div class="a"><b>Dhanvini Gudi</b>, Kevin J. Bennett, Kyle Barcus, Jill Cleveland, Susanna M. Thon, V. Sara Thoi</div>
+            <div class="v">The Electrochemical Society (ECS) Meeting · Chicago, USA · Oct 2025</div>
+          </div>
+
+          <div class="pub-entry">
+            <div class="t">Hybrid Multi-functional PbS Colloidal Quantum Dot Materials for Solar Cells and Photobatteries</div>
+            <div class="a"><b>Dhanvini Gudi</b>, Arlene Chiu, Dana C. Kachman, Eric Rong, Kevin M. Bennett, V. Sara Thoi, Susanna M. Thon</div>
+            <div class="v">IEEE PVSC · Gordon Research Conference · Les Diablerets, Switzerland · Jul 2024</div>
+          </div>
+
+          <div class="pub-entry">
+            <div class="t">Improving PbS Colloidal Quantum Dot Solar Cell Performance via Solution-Phase Engineering</div>
+            <div class="a"><b>Dhanvini Gudi</b>, Arlene Chiu, Dana C. Kachman, Eric Rong, Susanna M. Thon</div>
+            <div class="v">IEEE Photovoltaic Society Conference (PVSC) · San Juan, USA · Jun 2023</div>
+          </div>
+
+        </div>
+
+        <a class="scholar-link" href="https://scholar.google.com/citations?user=Yqbgqm4AAAAJ&hl=en" target="_blank" rel="noopener">Full publication list on Google Scholar →</a>
+
+      </div><!-- /acad-research -->
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       SCICOMM & OUTREACH
+  ══════════════════════════════════════════════════ -->
+  <section class="section" id="scicomm">
+    <div class="section-inner">
+
+      <div class="section-top">
+        <div>
+          <p class="eyebrow">Communication · Education · Policy · Community</p>
+          <h2 class="page-title">Scicomm &amp; Outreach</h2>
+          <p class="page-desc">I am passionate about making science accessible and meaningful. If you are looking for someone with expertise in science and technology with a passion for translating complex science for diverse audiences, let's talk! Here's a sample of the kind of work I like to make across video, writing, curriculum design, and outreach projects.</p>
+        </div>
+        <div class="sec-photo">
+          <!-- ══════════════════════════════════════════
+               EDIT PHOTO — Scicomm tab
+               Suggested: filming a video, at an outreach event, or a scicomm headshot
+               1. Put your photo file in the same folder as index.html
+               2. Delete the <div class="photo-ph"> line below
+               3. Add: <img src="YOUR-FILENAME.jpg" alt="Dhanvini scicomm">
+               Recommended: 600×450px landscape
+          ══════════════════════════════════════════ -->
+ 	<img src="scicomm.jpg" alt="Dhanvini scicomm" style="object-position:  0% 50%;  transform: scale(1.2);">
+
+        </div>
+      </div>
+
+      <!-- Sub-tabs -->
+      <div class="sci-tabs">
+        <button class="sci-tab active" onclick="showSciTab('social', this)">Social Media</button>
+        <button class="sci-tab"        onclick="showSciTab('writing', this)">Writing</button>
+        <button class="sci-tab"        onclick="showSciTab('projects', this)">Projects &amp; Curriculum</button>
+      </div>
+
+
+      <!-- ── SOCIAL MEDIA ───────────────────────────────── -->
+      <div class="sci-panel active" id="sci-social">
+        <p style="font-size:0.9rem; color:var(--text-2); margin-bottom:1.5rem; max-width:60ch;">
+          <strong>Dhanvini Explores</strong> I make short-form science videos and infographics to explore the science around us. I cover scientific topics by encouraging learning through curiosity.
+        </p>
+
+        <!--
+          EDIT each card:
+          1. href="" -> the post's URL (card 1 is set as an example)
+          2. Put the post's thumbnail image inside .post-thumb:
+             <img src="your-image.jpg" alt="Post description">
+             and remove the "Add thumbnail image" text.
+        -->
+        <div class="post-grid">
+
+          <a class="post-card" href="https://www.instagram.com/p/DWh0NEgDbit/" target="_blank" rel="noopener">
+            <div class="post-thumb">
+              <img src="scicomm-socmedia1.jpg" alt="Post description">
+              Add thumbnail image
+            </div>
+            <div class="post-body">
+              <p class="post-caption">How a pressed flower bookmark workshop made me think about quantum dots</p>
+                          </div>
+          </a>
+
+          <a class="post-card" href="https://www.instagram.com/dhanviniexplores/" target="_blank" rel="noopener">
+            <div class="post-thumb">
+           <img src="scicommsocmedia2.jpg" alt="Post description">
+              Add thumbnail image
+            </div>
+            <div class="post-body">
+              <p class="post-caption">Explaining how etching works using an ancient architectural wonder as example </p>
+            </div>
+          </a>
+
+          <a class="post-card" href="https://www.instagram.com/dhanviniexplores/" target="_blank" rel="noopener">
+            <div class="post-thumb">
+           <img src="scicommsocmedia3.jpg" alt="Post description">
+              Add thumbnail image
+            </div>
+            <div class="post-body">
+              <p class="post-caption">Mythbusting Whatsapp forwards, wise Indian grandmother style</p>
+            </div>
+          </a>
+
+          <a class="post-card" href="https://www.instagram.com/dhanviniexplores/" target="_blank" rel="noopener">
+            <div class="post-thumb">
+          <img src="scicommsocmedia4.jpg" alt="Post description">
+              Add thumbnail image
+            </div>
+            <div class="post-body">
+              <p class="post-caption">What geckos have in common with atom-thin graphene</p>
+            </div>
+          </a>
+
+          <a class="post-card" href="https://www.instagram.com/dhanviniexplores/" target="_blank" rel="noopener">
+            <div class="post-thumb">
+          <img src="scicommsocmedia5.jpg" alt="Post description">
+              Add thumbnail image
+            </div>
+            <div class="post-body">
+              <p class="post-caption">A carousel explaining how hair dyes</p>
+            </div>
+          </a>
+
+          <a class="post-card" href="https://www.instagram.com/dhanviniexplores/" target="_blank" rel="noopener">
+            <div class="post-thumb">
+             <img src="scicommsocmedia6.jpg" alt="Post description">
+              Add thumbnail image
+            </div>
+            <div class="post-body">
+              <p class="post-caption">A simple explanation on how solar cells work</p>
+            </div>
+          </a>
+
+        </div>
+      </div><!-- /sci-social -->
+
+
+      <!-- ── WRITING ─────────────────────────────────── -->
+      <div class="sci-panel" id="sci-writing">
+        <!-- EDIT: Add/remove/update writing entries below -->
+        <div class="writing-list">
+
+<a class="writing-item" href="https://substack.com/home/post/p-166735713" target="_blank" rel="noopener">
+            <span class="writing-badge">Substack Science</span>
+            <div>
+              <!-- EDIT: Add your actual LTS article title(s) here -->
+              <div class="writing-title">Thermoelectrics: How Electronic Charges Can Be Used For Cooling </div>
+              <div class="writing-desc">Science blogging on Substack</div>
+            </div>
+          </a>
+
+          <a class="writing-item" href="https://drive.google.com/drive/folders/1RNFHyGefME1eQ6jvlUDXHxyfDu5-VZTT" target="_blank" rel="noopener">
+            <span class="writing-badge">Zine Article</span>
+            <div>
+              <div class="writing-title">Waste Not, Want Not: Engineering Powerful Technologies from Kitchen Scraps</div>
+              <div class="writing-desc">A zine contribution to Project Bridge JHU exploring how everyday materials can be repurposed for engineering—making sustainability tangible for a general audience.</div>
+            </div>
+          </a>
+
+  
+          <a class="writing-item" href="https://medium.com/paper-crane-lab/5-ways-to-pursue-that-passion-project-you-have-always-been-too-busy-for-47dd1c2fc6fd" target="_blank" rel="noopener">
+            <span class="writing-badge">Listicle</span>
+            <div>
+              <div class="writing-title">5 Ways to Pursue That Passion Project You Have Always Been Too Busy For</div>
+              <div class="writing-desc">A listicle to encourage STEAM project explorations written for Paper Crane Lab</div>
+            </div>
+          </a>
+
+        
+
+         
+        
+        </div>
+      </div><!-- /sci-writing -->
+
+
+      <!-- ── PROJECTS & CURRICULUM ──────────────────── -->
+      <div class="sci-panel" id="sci-projects">
+        <!-- EDIT: Add/remove/update project cards below -->
+        <div class="project-grid">
+
+          <!-- EDIT href: link to your Instructables profile or Paper Crane Lab page -->
+          <a class="project-card" href="https://www.instructables.com/member/PaperCraneLab/" target="_blank" rel="noopener">
+            <div class="project-icon">✂️</div>
+            <div class="project-title">Paper Crane Lab — STEM + Art Curriculum on Instructables</div>
+            <div class="project-desc">
+              As Content Developer and Educator at Paper Crane Lab (nonprofit, India), I co-designed and wrote STEAM tutorials on Instructables—garnering 80k+ views and winning a STEM Contest prize.
+            </div>
+            <div class="tags">
+                          </div>
+          </a>
+
+          
+        </div>
+      </div><!-- /sci-projects -->
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       CREATIVE PROJECTS
+  ══════════════════════════════════════════════════ -->
+  <section class="section" id="creative">
+    <div class="section-inner">
+
+      <div class="section-top">
+        <div>
+          <p class="eyebrow">Art · Dance · Community</p>
+          <h2 class="page-title">Art</h2>
+          <p class="page-desc">Beyond research and science communication, I build community through art, movement, and culture.</p>
+        </div>
+        <div class="sec-photo">
+          <!-- ══════════════════════════════════════════
+               EDIT PHOTO — Creative tab
+               Suggested: BMore Natyam performance, dance rehearsal, or community event
+               1. Put your photo file in the same folder as index.html
+               2. Delete the <div class="photo-ph"> line below
+               3. Add: <img src="YOUR-FILENAME.jpg" alt="BMore Natyam performance">
+               Recommended: 600×450px landscape
+          ══════════════════════════════════════════ -->
+          <img src="dance.jpg" alt="BMore Natyam performance">
+        </div>
+      </div>
+
+      <!-- EDIT: Add/remove/update creative project cards below -->
+      <div class="project-grid">
+
+        <a class="project-card" href="https://www.instagram.com/bmorenatyam/" target="_blank" rel="noopener">
+          <div class="project-icon">🪷</div>
+          <div class="project-title">BMore Natyam — Indian Classical Dance Community</div>
+          <div class="project-desc">
+            I founded BMore Natyam to bring Bharatanatyam (Indian classical dance) to Baltimore through free and donation-based sessions. The community has grown to 40+ dancers. I organize workshops, performances, and cultural celebrations through community events, building connection through movement across the city.
+          </div>
+        </a>
+
+        <a class="project-card" href="https://youtu.be/JwLjGFRngTA?si=vM1Qx1lceHmFMdws" target="_blank" rel="noopener">
+          <div class="project-icon">🪷</div>
+          <div class="project-title">Anxiety: Through Dance</div>
+          <div class="project-desc">
+            A collaborative choreography depicting the onset of anxiety through Bharatanatyam and dialogue
+          </div>
+        </a>
+
+        <a class="project-card" href="https://www.youtube.com/@BMoreNatyam" target="_blank" rel="noopener">
+          <div class="project-icon">🪷</div>
+          <div class="project-title">Bharatanatyam through fusion music</div>
+          <div class="project-desc">
+            Collaborative Bharatanatyam choreographies on fusion music for Windmills Dance Festival, Baltimore
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       WORK WITH ME
+  ══════════════════════════════════════════════════ -->
+  <section class="section" id="workwithme">
+    <div class="section-inner">
+
+      <div class="section-top">
+        <div>
+          <p class="eyebrow">Collaborate · Create</p>
+          <h2 class="page-title">Work With Me</h2>
+          <p class="page-desc"> I sit at the intersection of research, science communication, and creative arts: I'm an <strong>active researcher</strong> who also <strong>communicates, teaches, and builds community</strong>. If you would like to work with me on something, reach out to me below. Here are some ways I can help! </p>
+        </div>
+        <div class="sec-photo">
+          <!-- EDIT PHOTO — Work With Me tab. Suggested: you speaking or filming. -->
+          <img src="headshot.jpg" alt="Dhanvini at work" style="object-position: 0% center; transform: scale(1.0);">
+        </div>
+      </div>
+
+      
+      <!-- EDIT: Add / remove / edit the ways people can work with you -->
+      <div class="offer-grid">
+
+       
+<div class="offer-card">
+          <div class="offer-icon">🎓</div>
+          <div class="offer-title">Teaching, Curriculum Development &amp; Mentoring</div>
+          <div class="offer-desc">Lecturing, curriculum design (including K–12 and under-resourced classrooms), and one-on-one mentoring for students.</div>
+          <a class="btn btn-primary" href="#connect">Work with me →</a>
+        </div>
+
+<div class="offer-card">
+          <div class="offer-icon">🏘️</div>
+          <div class="offer-title">Science Outreach, Curriculum Development</div>
+          <div class="offer-desc">Creating STEM/STEAM education curriculum and programs for science outreach.</div>
+          <a class="btn btn-primary" href="#connect">Create with me →</a>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-icon">🎬</div>
+          <div class="offer-title">Science Communication &amp; Social Media Content</div>
+          <div class="offer-desc">Short-form video, explainers, and written pieces. I would love to collaborate with scientists, labs and institutions that want to reach non-scientific audiences. </div>
+          <a class="btn btn-primary" href="#connect">Collaborate on content →</a>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-icon">🔬</div>
+          <div class="offer-title">Research Collaboration</div>
+          <div class="offer-desc">Semiconductor materials and devices, photovoltaics, and optical/electronic characterization. Open to academic and industry collaborations.</div>
+          <a class="btn btn-primary" href="#connect">Discuss a project →</a>
+        </div>
+
+ <div class="offer-card">
+          <div class="offer-icon">🎤</div>
+          <div class="offer-title">Speaking &amp; Guest Talks</div>
+          <div class="offer-desc">Keynotes, guest lectures, panels, and outreach events pitched to anyone from specialists to the general public.</div>
+          <a class="btn btn-primary" href="#connect">Invite me to speak →</a>
+        </div>
+
+
+      </div>
+
+      <hr>
+
+      <!-- ── GET IN TOUCH (merged from the old Contact tab) ── -->
+      <div id="connect">
+        <p class="eyebrow" style="margin-bottom:0.4rem;">Get in Touch</p>
+        <h3 style="font-family:'Lora',serif; font-size:1.6rem; font-weight:600; margin-bottom:0.5rem;">Let's talk</h3>
+        <p class="page-desc" style="margin-bottom:2rem;">Would you like to collaborate or even just talk about fun science or dance? I'd love to hear from you.</p>
+
+        <div class="contact-split">
+
+          <div>
+            <p style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-2); margin-bottom:0.85rem;">Find Me At</p>
+
+            <!-- EDIT: Update your links -->
+            <a class="contact-link" href="mailto:dhanvini.gudi@gmail.com">
+              <div class="contact-icon">@</div>
+              <div>
+                <div class="contact-label">Email</div>
+                <div class="contact-value">dhanvini.gudi@gmail.com</div>
+              </div>
+            </a>
+
+            <a class="contact-link" href="https://www.linkedin.com/in/dhanvini-gudi" target="_blank">
+              <div class="contact-icon">in</div>
+              <div>
+                <div class="contact-label">LinkedIn</div>
+                <div class="contact-value">linkedin.com/in/dhanvini-gudi</div>
+              </div>
+            </a>
+
+            <a class="contact-link" href="https://www.instagram.com/dhanviniexplores" target="_blank">
+              <div class="contact-icon">📷</div>
+              <div>
+                <div class="contact-label">Instagram</div>
+                <div class="contact-value">@dhanviniexplores</div>
+              </div>
+            </a>
+
+            <a class="contact-link" href="https://scholar.google.com" target="_blank">
+              <div class="contact-icon" style="font-size:0.78rem;">GS</div>
+              <div>
+                <div class="contact-label">Google Scholar</div>
+                <div class="contact-value">Dhanvini Gudi</div>
+              </div>
+            </a>
+
+          </div>
+
+          <div class="contact-form">
+            <p style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-2); margin-bottom:1rem;">Send a Message</p>
+            <p style="font-size:0.9rem; color:var(--text-2); line-height:1.7; margin-bottom:1.25rem;">Have a question, an idea, or a project in mind? Drop me a message and I'll get back to you.</p>
+            <a class="btn btn-primary" style="width:100%; box-sizing:border-box; text-align:center;" href="https://forms.gle/W2vaxoZF2a1uTtrq8" target="_blank" rel="noopener">Send me a message →</a>
+            <p class="form-note">Opens a quick form — no sign-in needed.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       CV
+  ══════════════════════════════════════════════════ -->
+  <section class="section" id="cv">
+    <div class="section-inner">
+
+      <div class="section-top">
+        <div>
+          <p class="eyebrow">Curriculum Vitae</p>
+          <h2 class="page-title">CV</h2>
+          <p class="page-desc">My full academic CV is available to download below.</p>
+        </div>
+        <div class="sec-photo">
+          <!-- ══════════════════════════════════════════
+               EDIT PHOTO — CV tab
+               Suggested: professional headshot or conference photo
+               1. Put your photo file in the same folder as index.html
+               2. Delete the <div class="photo-ph"> line below
+               3. Add: <img src="YOUR-FILENAME.jpg" alt="Dhanvini Gudi">
+               Recommended: 600×450px landscape or portrait
+          ══════════════════════════════════════════ -->
+          <img src="cv.jpg" alt="CV">
+        </div>
+      </div>
+
+      <!-- Download -->
+      <div class="cv-top">
+        <div>
+          <p>Full CV available to download</p>
+          <!-- EDIT: Update this date when you revise your CV -->
+          <span>Last updated: May 2026</span>
+        </div>
+        <!-- EDIT: Replace href with the actual filename of your CV PDF -->
+        <a class="btn btn-primary" href="Dhanvini_CV_and_Resume_Academic_website.pdf" target="_blank">Download CV →</a>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- ══════════════════════════════════════════════════
+       JAVASCRIPT — section switching and navigation
+  ══════════════════════════════════════════════════ -->
+  <script>
+    function showSection(id) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      // Show target
+      document.getElementById(id).classList.add('active');
+      // Update nav highlights
+      document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(l => {
+        l.classList.remove('active');
+        if ((l.getAttribute('onclick') || '').includes("'" + id + "'")) {
+          l.classList.add('active');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showAcadTab(id, btn) {
+      document.querySelectorAll('.acad-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.acad-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('acad-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function showSciTab(id, btn) {
+      document.querySelectorAll('.sci-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.sci-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('sci-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function toggleMenu() {
+      document.getElementById('mobile-nav').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobile-nav').classList.remove('open');
+    }
+  </script>
+
+</body>
+</html>
